@@ -143,9 +143,10 @@ public class TemperatureSeriesAnalysis {
                 buffer *= 2;
             }
             double[] newList = new double[buffer];
-            for (int i = 0; i < size; i++) {
-                newList[i] = temperatureSeries[i];
-            }
+//            for (int i = 0; i < size; i++) {
+//                newList[i] = temperatureSeries[i];
+//            }
+            System.arraycopy(temperatureSeries, 0, newList, 0, size);
             temporary = newList;
         }
         int tempSize = size;
