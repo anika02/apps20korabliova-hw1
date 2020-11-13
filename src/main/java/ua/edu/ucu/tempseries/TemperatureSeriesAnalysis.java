@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
 
-    private static final double absZero = -273.0;
+    private final double absZero = -273.0;
     private static final double deltaZero = 0.00001;
     private double[] temperatureSeries = new double[1];
     private int size = 0;
