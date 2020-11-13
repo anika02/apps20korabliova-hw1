@@ -4,8 +4,8 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysis {
 
-    private static final double absoluteZero = -273.0;
-    private static final double delta = 0.00001;
+    private static final double absZero = -273.0;
+    private static final double deltaZero = 0.00001;
     private double[] temperatureSeries = new double[1];
     private int size = 0;
     private int buffer = 1;
@@ -16,7 +16,7 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] tempSeries) {
         for (double temp : tempSeries) {
-            if (temp < absoluteZero) {
+            if (temp < absZero) {
                 throw new InputMismatchException();
             }
         }
@@ -89,7 +89,7 @@ public class TemperatureSeriesAnalysis {
         for (int i = 1; i < size; i++) {
             double temp = temperatureSeries[i];
             if ((min > Math.abs(temp - tempValue))
-                    || ((Math.abs(min - Math.abs(temp - tempValue)) < delta)
+                    || ((Math.abs(min - Math.abs(temp - tempValue)) < deltaZero)
                     && (temp > tempValue))) {
                 closest = temp;
                 min = Math.abs(closest - tempValue);
@@ -150,7 +150,7 @@ public class TemperatureSeriesAnalysis {
         }
         int tempSize = size;
         for (double temp : temps) {
-            if (temp < absoluteZero) {
+            if (temp < absZero) {
                 throw new InputMismatchException();
             }
             temporary[tempSize] = temp;
