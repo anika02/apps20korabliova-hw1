@@ -39,14 +39,19 @@ public class TemperatureSeriesAnalysis {
         return Math.sqrt(sum/size);
     }
 
-    private double minMax(boolean greater) {
-        int great = greater?1:-1;
+    private double minMax(boolean maximum) {
+        int max;
+        if (maximum) {
+            max = 1;
+        } else {
+            max = -1;
+        }
         if (size == 0) {
             throw new IllegalArgumentException();
         }
         double temp = temperatureSeries[0];
         for (int i = 1; i < size; i++) {
-            if ((Double.compare(temp, temperatureSeries[i])*great>0)) {
+            if ((Double.compare(temp, temperatureSeries[i])*max > 0)) {
                 temp = temperatureSeries[i];
             }
         }
@@ -84,12 +89,17 @@ public class TemperatureSeriesAnalysis {
     }
 
     private double[] lessGreaterThen(double tempValue, boolean greater) {
-        int great = greater?1:-1;
+        int great;
+        if (greater) {
+            great = 1;
+        } else {
+            great = -1;
+        }
         double[] tempResults = new double[size];
         int counter = 0;
         for (int i = 0; i < size; i++) {
             double temp = temperatureSeries[i];
-            if (Double.compare(temp, tempValue)*great>0) {
+            if (Double.compare(temp, tempValue)*great > 0) {
                 tempResults[counter] = temp;
                 ++counter;
             }
