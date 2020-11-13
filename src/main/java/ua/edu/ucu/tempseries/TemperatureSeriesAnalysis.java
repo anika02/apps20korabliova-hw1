@@ -19,10 +19,10 @@ public class TemperatureSeriesAnalysis {
                 throw new InputMismatchException();
             }
         }
-        if (temperatureSeries.length != 0) {
-            buffer = temperatureSeries.length;
-            size = temperatureSeries.length;
-            System.arraycopy(this.temperatureSeries, 0, temperatureSeries, 0, size);
+        this.temperatureSeries = temperatureSeries;
+        this.size = temperatureSeries.length;
+        if (size != 0) {
+            this.buffer = temperatureSeries.length;
         }
     }
 
