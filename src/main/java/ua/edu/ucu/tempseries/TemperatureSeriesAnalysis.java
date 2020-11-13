@@ -15,16 +15,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] tempSeries) {
-        for (double temp : tempSeries) {
-            if (temp < ABSOLUTEZERO) {
-                throw new InputMismatchException();
-            }
-        }
-        this.temperatureSeries = tempSeries;
-        this.size = tempSeries.length;
-        if (size != 0) {
-            this.buffer = tempSeries.length;
-        }
+        addTemps(tempSeries);
     }
 
     public double average() {
