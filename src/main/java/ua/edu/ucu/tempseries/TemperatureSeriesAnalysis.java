@@ -10,9 +10,7 @@ public class TemperatureSeriesAnalysis {
     private int size = 0;
     private int buffer = 1;
 
-    public TemperatureSeriesAnalysis() {
-
-    }
+    public TemperatureSeriesAnalysis() {    }
 
     public TemperatureSeriesAnalysis(double[] tempSeries) {
         addTemps(tempSeries);
@@ -134,9 +132,6 @@ public class TemperatureSeriesAnalysis {
                 buffer *= 2;
             }
             double[] newList = new double[buffer];
-//            for (int i = 0; i < size; i++) {
-//                newList[i] = temperatureSeries[i];
-//            }
             System.arraycopy(temperatureSeries, 0, newList, 0, size);
             temporary = newList;
         }

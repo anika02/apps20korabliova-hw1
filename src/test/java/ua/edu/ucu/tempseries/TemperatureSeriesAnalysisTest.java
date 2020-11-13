@@ -12,7 +12,7 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testTemperatureSeriesAnalysisWithEmptyArray() {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
-        int expResult = 1;
+        int expResult = 0;
         int actualResult = seriesAnalysis.addTemps();
         assertEquals(expResult, actualResult, 0.00001);
     }
@@ -21,7 +21,7 @@ public class TemperatureSeriesAnalysisTest {
     public void testTemperatureSeriesAnalysisAddTemps() {
         double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0, 7.0};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
-        int expResult = 8;
+        int expResult = 5;
         int actualResult = seriesAnalysis.addTemps();
         assertEquals(expResult, actualResult, 0.00001);
     }
