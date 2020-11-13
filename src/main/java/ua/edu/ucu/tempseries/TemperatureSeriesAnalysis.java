@@ -39,30 +39,26 @@ public class TemperatureSeriesAnalysis {
         return Math.sqrt(sum/size);
     }
 
-    public double min() {
+    private double minMax(boolean greater) {
+        int great = greater?1:-1;
         if (size == 0) {
             throw new IllegalArgumentException();
         }
-        double minTemp = temperatureSeries[0];
+        double temp = temperatureSeries[0];
         for (int i = 1; i < size; i++) {
-            if (minTemp > temperatureSeries[i]) {
-                minTemp = temperatureSeries[i];
+            if ((Double.compare(temp, temperatureSeries[i])*great>0)) {
+                temp = temperatureSeries[i];
             }
         }
-        return minTemp;
+        return temp;
+    }
+
+    public double min() {
+        return minMax(true);
     }
 
     public double max() {
-        if (size == 0) {
-            throw new IllegalArgumentException();
-        }
-        double maxTemp = temperatureSeries[0];
-        for (int i = 1; i < size; i++) {
-            if (maxTemp < temperatureSeries[i]) {
-                maxTemp = temperatureSeries[i];
-            }
-        }
-        return maxTemp;
+        return minMax(false);
     }
 
     public double findTempClosestToZero() {
@@ -87,12 +83,13 @@ public class TemperatureSeriesAnalysis {
         return closest;
     }
 
-    public double[] findTempsLessThen(double tempValue) {
+    private double[] lessGreaterThen(double tempValue, boolean greater) {
+        int great = greater?1:-1;
         double[] tempResults = new double[size];
         int counter = 0;
         for (int i = 0; i < size; i++) {
             double temp = temperatureSeries[i];
-            if (temp < tempValue) {
+            if (Double.compare(temp, tempValue)*great>0) {
                 tempResults[counter] = temp;
                 ++counter;
             }
@@ -102,27 +99,19 @@ public class TemperatureSeriesAnalysis {
         return results;
     }
 
+    public double[] findTempsLessThen(double tempValue) {
+        return lessGreaterThen(tempValue, false);
+    }
+
     public double[] findTempsGreaterThen(double tempValue) {
-        double[] tempResults = new double[size];
-        int counter = 0;
-        for (int i = 0; i < size; i++) {
-            double temp = temperatureSeries[i];
-            if (temp > tempValue) {
-                tempResults[counter] = temp;
-                ++counter;
-            }
-        }
-        double[] results = new double[counter];
-        System.arraycopy(tempResults, 0, results, 0, counter);
-        return results;
+        return lessGreaterThen(tempValue, true);
     }
 
     public TempSummaryStatistics summaryStatistics() {
         if (size == 0) {
             throw new IllegalArgumentException();
         }
-        TempSummaryStatistics statistics = new TempSummaryStatistics(this);
-        return statistics;
+        return new TempSummaryStatistics(this);
     }
 
     public int addTemps(double... temps) {
